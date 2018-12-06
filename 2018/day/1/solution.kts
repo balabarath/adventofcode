@@ -3,22 +3,33 @@ import java.io.File
 println("Hello world")
 var result: Int = 0
 
-vat set = HashSet<Int>(500)
-set.add(0)
+val visitedNumbers: java.util.HashSet<Int> = hashSetOf()
+visitedNumbers.add(0)
 
-File("input.txt").forEachLine {
-	println("=" + it)
+var stateChanged: Boolean = false
 
-	var prefix: String = it.substring(0,1)
-	var number: String = it.substring(1)
+while(!stateChanged){
 
-	if(prefix.equals("+")) {
-		result += number.toInt()
-	} else {
-		result -= number.toInt()
-	}
+	
+		File("input.txt").forEachLine {
+
+			var prefix: String = it.substring(0,1)
+			var number: String = it.substring(1)
+
+			if(prefix.equals("+")) {
+				result += number.toInt()
+			} else {
+				result -= number.toInt()
+			}
+
+			if(visitedNumbers.contains(result)) {
+				println(result)
+				stateChanged=true;
+				System.exit(0)
+			} else {
+				visitedNumbers.add(result)
+			}
+		}
+
 	
 }
-
-
-println("Number:::" + result)
