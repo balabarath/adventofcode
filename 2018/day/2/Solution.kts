@@ -3,6 +3,7 @@ import java.io.File
 var twoCount = 0
 var threeCount = 0
 var words = File("input.txt").readLines()
+var result = ""
 
 File("input.txt").forEachLine {
     val charSequenceGroup  = it.asSequence().groupBy({it})
@@ -13,21 +14,19 @@ File("input.txt").forEachLine {
 
 for(i in words.indices) {
     for(j in words.indices) {
-        var diff = 0;
+        var diff = 0
         for(k in words.get(i).indices) {
             if(words.get(i).get(k) != words.get(j).get(k))
-                diff++;
+                diff++
+            else
+                result += words.get(i).get(k)
         }
 
         if(diff == 1) {
-            for(k in words.get(i).indices) {
-                if(words.get(i).get(k) == words.get(j).get(k)) {
-                    print(words.get(i).get(k))
-
-                }
-            }
+            print(result)
             System.exit(0)
         }
+        result = ""
     }
 }
 
