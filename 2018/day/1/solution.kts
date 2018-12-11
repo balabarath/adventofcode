@@ -9,27 +9,22 @@ visitedNumbers.add(0)
 var stateChanged: Boolean = false
 
 while(!stateChanged){
+	File("input.txt").forEachLine {
+		var prefix: String = it.substring(0,1)
+		var number: String = it.substring(1)
 
-	
-		File("input.txt").forEachLine {
-
-			var prefix: String = it.substring(0,1)
-			var number: String = it.substring(1)
-
-			if(prefix.equals("+")) {
-				result += number.toInt()
-			} else {
-				result -= number.toInt()
-			}
-
-			if(visitedNumbers.contains(result)) {
-				println(result)
-				stateChanged=true;
-				System.exit(0)
-			} else {
-				visitedNumbers.add(result)
-			}
+		if(prefix.equals("+")) {
+			result += number.toInt()
+		} else {
+			result -= number.toInt()
 		}
 
-	
+		if(visitedNumbers.contains(result)) {
+			println(result)
+			stateChanged=true;
+			System.exit(0)
+		} else {
+			visitedNumbers.add(result)
+		}
+	}
 }

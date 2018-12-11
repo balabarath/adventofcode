@@ -2,6 +2,7 @@ import java.io.File
 
 var twoCount = 0
 var threeCount = 0
+var words = File("input.txt").readLines()
 
 File("input.txt").forEachLine {
     val charSequenceGroup  = it.asSequence().groupBy({it})
@@ -9,4 +10,24 @@ File("input.txt").forEachLine {
     threeCount += if (charSequenceGroup.filter({it.value.size == 3}).size > 0) 1 else 0
 
 }
-println(twoCount*threeCount)
+
+for(i in words.indices) {
+    for(j in words.indices) {
+        var diff = 0;
+        for(k in words.get(i).indices) {
+            if(words.get(i).get(k) != words.get(j).get(k))
+                diff++;
+        }
+
+        if(diff == 1) {
+            for(k in words.get(i).indices) {
+                if(words.get(i).get(k) == words.get(j).get(k)) {
+                    print(words.get(i).get(k))
+
+                }
+            }
+            System.exit(0)
+        }
+    }
+}
+
